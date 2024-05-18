@@ -128,7 +128,7 @@ namespace Snake
         { 
             
             Random random = new Random();
-            r1 = random.Next(0, _height - size);
+            r1 = random.Next(0, _height - size + 20);
             int temp1 = r1 % size;
             r1 -= temp1;
             r2 = random.Next(size + 40, _height - size * 3);
