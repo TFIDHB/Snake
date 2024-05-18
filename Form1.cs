@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Snake
 {
     public partial class Form1 : Form
     {
-        private int r1, r2;
+        private int rand_point_x, rand_point_y;
         private PictureBox point;
         
         private PictureBox[] snake = new PictureBox[200];
@@ -82,7 +76,7 @@ namespace Snake
         }
         private void eatPoint()
         {
-            if (snake[0].Location.X == r1 && snake[0].Location.Y == r2) {
+            if (snake[0].Location.X == rand_point_x && snake[0].Location.Y == rand_point_y) {
                 labelScore.Text = "Score: " + ++score;
                 snake[score] = new PictureBox();
                 snake[score].Location = new Point(snake[score - 1].Location.X + 20*_x, snake[score - 1].Location.Y - 20*_y);
@@ -128,13 +122,13 @@ namespace Snake
         { 
             
             Random random = new Random();
-            r1 = random.Next(0, _height - size + 20);
-            int temp1 = r1 % size;
-            r1 -= temp1;
-            r2 = random.Next(size + 40, _height - size * 3);
-            int temp2 = r2 % size;
-            r2 -= temp2;
-            point.Location = new Point(r1, r2);
+            rand_point_x = random.Next(0, _height - size + 20);
+            int temp1 = rand_point_x % size;
+            rand_point_x -= temp1;
+            rand_point_y = random.Next(size + 40, _height - size * 3);
+            int temp2 = rand_point_y % size;
+            rand_point_y -= temp2;
+            point.Location = new Point(rand_point_x, rand_point_y);
             Controls.Add(point);
         }
 
