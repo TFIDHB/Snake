@@ -30,6 +30,7 @@ namespace Snake
             snake[0].Location = new Point(200,200);
             snake[0].Size = new Size(size, size);
             snake[0].BackColor = Color.Black;
+            labelScore.Font = new Font(labelScore.Font, FontStyle.Bold);
             labelScore.Text = "Score: 0";
             labelScore.Location = new Point(0,0);
             Controls.Add(labelScore);
@@ -41,6 +42,10 @@ namespace Snake
             border();
             timer.Tick += new EventHandler(Update);
             timer.Interval = 200;
+            
+        }
+        public void timerStart()
+        {
             timer.Start();
         }
         public void border()
@@ -94,15 +99,27 @@ namespace Snake
                 if (snake[0].Location == snake[i].Location)
                 {
                     timer.Stop();
-                    MessageBox.Show("Игра окончена!");
+                    DialogResult result = MessageBox.Show("Игра окончена!");
+                    if (result == DialogResult.OK)
+                    {
+                        Form2 Form_2 = new Form2();
+                        Form_2.Show();
+                        Hide();
+                    }
                 }
             }                
             if (snake[0].Location.X < 0 || snake[0].Location.X >= _width ||
                        snake[0].Location.Y <= 40 || snake[0].Location.Y >= _width - size * 3)
                 {
                     timer.Stop();
-                    MessageBox.Show("Игра окончена!");
+                DialogResult result = MessageBox.Show("Игра окончена!");
+                if (result == DialogResult.OK)
+                {
+                    Form2 Form_2 = new Form2();
+                    Form_2.Show();
+                    Hide();
                 }
+            }
         }
         private void moveSnake()
         {
@@ -122,7 +139,7 @@ namespace Snake
         { 
             
             Random random = new Random();
-            rand_point_x = random.Next(0, _height - size + 20);
+            rand_point_x = random.Next(0, _height - size + 40);
             int temp1 = rand_point_x % size;
             rand_point_x -= temp1;
             rand_point_y = random.Next(size + 40, _height - size * 3);
