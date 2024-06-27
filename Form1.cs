@@ -135,19 +135,27 @@ namespace Snake
             moveSnake();
         }
 
-        private void genPoints() 
-        { 
-            
+        private void genPoints()
+        {
             Random random = new Random();
-            rand_point_x = random.Next(0, _height - size + 40);
+
+            int minX = 40;
+            int maxX = _height - size;
+            int minY = size + 40;
+            int maxY = _height - size * 3;
+
+            rand_point_x = random.Next(minX, maxX);
             int temp1 = rand_point_x % size;
             rand_point_x -= temp1;
-            rand_point_y = random.Next(size + 40, _height - size * 3);
+
+            rand_point_y = random.Next(minY, maxY);
             int temp2 = rand_point_y % size;
             rand_point_y -= temp2;
+
             point.Location = new Point(rand_point_x, rand_point_y);
             Controls.Add(point);
         }
+
 
         private void Map() { 
             for (int i = 2; i < _width/size; i++)
